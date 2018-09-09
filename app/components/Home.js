@@ -16,7 +16,7 @@ class Home extends React.Component {
 						placeholder="Yangon, Myanmar"
 						type='text'
 					/>
-					<Link className="" to="/battle">
+					<Link className="button " to="/battle">
 						Get Weather
 					</Link>
 
