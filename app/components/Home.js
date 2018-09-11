@@ -25,7 +25,8 @@ class Home extends React.Component {
 
 
 	render() {
-	
+		var match = this.props.match;
+		var city = this.state.city;
 		return (
 				<div className="home">
 					<h1>Enter a City and State</h1>
@@ -37,8 +38,13 @@ class Home extends React.Component {
 						autoComplete="off"
 						onChange={this.handleChange}
 					/>
-					<Link className="button " to="/forecast" onClick={api.get5DayForecast.bind(null,this.state.city)}>
-						Get Weather
+					<Link 
+						className="button " 
+						to={{
+								pathname: match.url+'forecast',
+								search: '?city=london'
+						}}>
+							Get Weather
 					</Link>
 
 
