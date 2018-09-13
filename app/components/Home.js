@@ -7,7 +7,7 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state= {
-			city: '',
+			city: ''
 		};
 
 		this.handleChange=this.handleChange.bind(this);
@@ -28,6 +28,7 @@ class Home extends React.Component {
 		var match = this.props.match;
 		var city = this.state.city;
 		return (
+				
 				<div className="home">
 					<h1>Enter a City and State</h1>
 					<input
@@ -42,7 +43,7 @@ class Home extends React.Component {
 						className="button " 
 						to={{
 								pathname: match.url+'forecast',
-								search: '?city=london'
+								search: '?city='+this.state.city
 						}}>
 							Get Weather
 					</Link>

@@ -5,7 +5,7 @@ function get5DayForecast (city) {
 	return (
 		axios.get(url)
 			.then(function(weather) {
-				console.log(weather);
+				return weather.data.list
 			})
 	)
 }
@@ -15,7 +15,7 @@ function getCurrentWeather (city) {
 	return (
 		axios.get(url)
 			.then(function(weather) {
-				console.log(weather);
+				return weather.data.list
 			})
 	)
 }
