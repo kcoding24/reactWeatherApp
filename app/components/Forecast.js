@@ -2,19 +2,26 @@ var React = require('react');
 var PropTypes = require('prop-types');
 var Loading = require('./Loading');
 var queryString = require('query-string');
-var api = require('../utils/api')
+var api = require('../utils/api');
+var utils = require('../utils/helper')
+var getDate = utils.getDate;
 
 function Day (props) {
+	var date = getDate(props.date)
+	var weather = '../images/weather-icons/'+props.weather+'.svg';
+	console.log(weather);
 	return (
 		<div>
-			{props.date}
-			{props.weather}
+			<img src={'/app/images/weather-icons/'+props.weather+'.svg'}/>
+			<p>{date}</p>
+
+			
 		</div>
 	)
 }
 
 Day.propTypes = {
-	date: PropTypes.number.isRequired,
+	date: PropTypes.string.isRequired,
 	weather: PropTypes.string.isRequired
 }
 
@@ -50,7 +57,7 @@ class Forecast extends React.Component {
 			}
 		return(	
 		<Day 
-			date={this.state.weatherForecast[0].dt}
+			date={this.state.weatherForecast[0].dt_txt}
 			weather={this.state.weatherForecast[0].weather[0].icon}
 		/>
 		)
