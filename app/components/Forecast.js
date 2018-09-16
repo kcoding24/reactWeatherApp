@@ -4,25 +4,51 @@ var Loading = require('./Loading');
 var queryString = require('query-string');
 var api = require('../utils/api');
 var utils = require('../utils/helper')
-var getDate = utils.getDate;
+var dayClassifier = utils.dayClassifier;
+var dayNameConverter = utils.dayNameConverter;
 
 function Day (props) {
-	var date = getDate(props.date)
-	var weather = '../images/weather-icons/'+props.weather+'.svg';
-	console.log(weather);
-	return (
-		<div>
-			<img src={'/app/images/weather-icons/'+props.weather+'.svg'}/>
-			<p>{date}</p>
+	let forecast = props.date;
+	let forecastIntervalLength = forecast.length;
+	console.log(forecast)
+	
 
-			
+	var day=dayClassifier(forecast);
+	
+	let monday=day[0];
+	let tuesday=day[1];
+	let wednesday=day[2];
+	let thursday=day[3];
+	let friday=day[4];
+	let saturday=day[5];
+	let sunday=day[6];
+
+	return (
+		<div className='forecastContainer'>
+		{day.map( function(day, index) {
+			 					let dayname = dayNameConverter(index);
+								return(
+									<div key={index}>
+									{day.length !== 0 && 
+										<div className='dayContainer'>
+											<h4 className='dayTitle'>{dayname}</h4>
+											{day}
+										</div>
+									}	
+									</div>
+									
+									
+								)
+							}
+						)
+		}
 		</div>
 	)
 }
 
 Day.propTypes = {
-	date: PropTypes.string.isRequired,
-	weather: PropTypes.string.isRequired
+	date: PropTypes.array.isRequired,
+	
 }
 
 
@@ -40,7 +66,6 @@ class Forecast extends React.Component {
 		var city = queryString.parse(this.props.location.search);
 		api.get5DayForecast(city.city)
 			.then(function(results) {
-				console.log(results);
 				this.setState(function() {
 					
 					return {loading: false,
@@ -55,13 +80,17 @@ class Forecast extends React.Component {
 		if(loading===true) {
 				return (<Loading />)
 			}
+		
+
 		return(	
+
 		<Day 
-			date={this.state.weatherForecast[0].dt_txt}
-			weather={this.state.weatherForecast[0].weather[0].icon}
+			date={this.state.weatherForecast}
+			
 		/>
 		)
-	}
+
+}	
 }
 
 module.exports=Forecast;
