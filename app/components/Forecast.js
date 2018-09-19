@@ -10,34 +10,21 @@ var dayNameConverter = utils.dayNameConverter;
 function Day (props) {
 	let forecast = props.date;
 	let forecastIntervalLength = forecast.length;
-	console.log(forecast)
-	
-
-	var day=dayClassifier(forecast);
-	
-	let monday=day[0];
-	let tuesday=day[1];
-	let wednesday=day[2];
-	let thursday=day[3];
-	let friday=day[4];
-	let saturday=day[5];
-	let sunday=day[6];
+	var [daysOrder, daysNameOrder]=dayClassifier(forecast);
 
 	return (
 		<div className='forecastContainer'>
-		{day.map( function(day, index) {
+		{daysOrder.map( function(day, index) {
 			 					let dayname = dayNameConverter(index);
 								return(
 									<div key={index}>
 									{day.length !== 0 && 
 										<div className='dayContainer'>
-											<h4 className='dayTitle'>{dayname}</h4>
+											<h4 className='dayTitle'>{daysNameOrder[index]}</h4>
 											{day}
 										</div>
 									}	
 									</div>
-									
-									
 								)
 							}
 						)
@@ -50,7 +37,6 @@ Day.propTypes = {
 	date: PropTypes.array.isRequired,
 	
 }
-
 
 class Forecast extends React.Component {
 		

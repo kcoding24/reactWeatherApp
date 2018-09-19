@@ -11,6 +11,16 @@ var daysMap = {
   "6":"Saturday"
 };
 
+var daysNumMap = {
+  "Sunday":"0",
+  "Monday":"1",
+  "Tuesday":"2",
+  "Wednesday":"3",
+  "Thursday":"4",
+  "Friday":"5",
+  "Saturday":"6"
+};
+
 var monthsMap = {
   "0":"Jan",
   "1":"Feb",
@@ -32,11 +42,12 @@ function dayNameConverter (num) {
 function getDate(date) {
   var reqDay = new Date(date);
   var day =daysMap[reqDay.getDay()];
+  var daynum=reqDay.getDay();
   var date = reqDay.getDate();
   var hour = reqDay.getHours();
   var month = monthsMap[reqDay.getMonth()];
 
-  return [day,hour]
+  return [day,hour,daynum]
 
 }
 
@@ -49,10 +60,12 @@ function dayClassifier(forecast) {
   var friday=[];
   var saturday=[];
   var sunday=[];
+  var days = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
+
   forecast.map( 
           function(forecast,index) {
-            var date = getDate(forecast.dt_txt)[0];
-            var hour = getDate(forecast.dt_txt)[1];
+            var [date,hour] = getDate(forecast.dt_txt);
+            
             var imageSrc = '/app/images/weather-icons/'+forecast.weather[0].icon+'.svg';
             switch(date) {
               case 'Monday': 
@@ -60,6 +73,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break;
@@ -68,6 +82,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break;
@@ -76,6 +91,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break;
@@ -84,6 +100,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break;
@@ -92,6 +109,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break;
@@ -100,6 +118,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break
@@ -108,6 +127,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{date}</p>
+                    <p>{forecast.dt_txt}</p>
                   </div>
                 )
                 break;
@@ -115,7 +135,25 @@ function dayClassifier(forecast) {
             
           }
         )
-return [monday,tuesday,wednesday,thursday,friday,saturday,sunday]
+
+  var currentDay = getDate(forecast[0].dt_txt)[2];
+
+  
+  
+  var daysOrder = [];
+  var daysNameOrder =[];
+  var i = 0;
+  while (i<5) {
+    var dayid=currentDay%7;
+    daysOrder.push(days[dayid]);
+    daysNameOrder.push(daysMap[dayid])
+    
+    i++;
+    currentDay++;
+  }
+  
+  
+return [daysOrder,daysNameOrder]
 }
 
 module.exports = {
