@@ -65,15 +65,15 @@ function dayClassifier(forecast) {
   forecast.map( 
           function(forecast,index) {
             var [date,hour] = getDate(forecast.dt_txt);
-            
+            var description = forecast.weather[0].description;
             var imageSrc = '/app/images/weather-icons/'+forecast.weather[0].icon+'.svg';
             switch(date) {
               case 'Monday': 
                 monday.push(
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
-                    <p>{hour}:00</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p className='hour'>{hour}:00</p>
+                    <p className='description'>{description}</p>
                   </div>
                 )
                 break;
@@ -82,7 +82,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p>{description}</p>
                   </div>
                 )
                 break;
@@ -90,8 +90,8 @@ function dayClassifier(forecast) {
                 wednesday.push(
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
-                    <p>{hour}:00</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p className='hour'>{hour}:00</p>
+                    <p className='description'>{description}</p>
                   </div>
                 )
                 break;
@@ -100,7 +100,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p>{description}</p>
                   </div>
                 )
                 break;
@@ -109,7 +109,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p>{description}</p>
                   </div>
                 )
                 break;
@@ -118,7 +118,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{hour}:00</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p>{description}</p>
                   </div>
                 )
                 break
@@ -127,7 +127,7 @@ function dayClassifier(forecast) {
                   <div key={index} className='day'>
                     <img src={imageSrc}/>
                     <p>{date}</p>
-                    <p>{forecast.dt_txt}</p>
+                    <p>{description}</p>
                   </div>
                 )
                 break;

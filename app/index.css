@@ -1,5 +1,6 @@
 html, body, #app {
 	height: 100%;
+	box-sizing: border-box;
 }
 
 .container {
@@ -38,15 +39,28 @@ html, body, #app {
 }
 
 .day{
-	width: 100px;
+	width: 150px;
+	border: 1px solid silver;
+	border-radius: 20px;
+	padding: 10px;
 }
 
 .dayTitle{
 	width: 100%;
+	font-size: 20px;
+	text-align: center;
 }
-
+img {
+	width: 70px;
+	height: 70px;
+	text-align: center;
+}
 .dayContainer {
 	display: flex;
 	flex-wrap: wrap;
-	border: solid;
+	border: 1px solid silver;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px;
+	box-shadow: 2px 2px 2px 2px silver;
 }

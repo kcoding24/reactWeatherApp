@@ -7,6 +7,10 @@ var utils = require('../utils/helper')
 var dayClassifier = utils.dayClassifier;
 var dayNameConverter = utils.dayNameConverter;
 
+function handleClick (day) {
+	console.log(day)
+}
+
 function Day (props) {
 	let forecast = props.date;
 	let forecastIntervalLength = forecast.length;
@@ -15,11 +19,10 @@ function Day (props) {
 	return (
 		<div className='forecastContainer'>
 		{daysOrder.map( function(day, index) {
-			 					let dayname = dayNameConverter(index);
 								return(
 									<div key={index}>
 									{day.length !== 0 && 
-										<div className='dayContainer'>
+										<div className='dayContainer' onClick={handleClick.bind(this,day)}>
 											<h4 className='dayTitle'>{daysNameOrder[index]}</h4>
 											{day}
 										</div>
